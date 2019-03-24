@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Ice Pony"><title>关于Minecraft的一些优化 · IcePony</title><meta name="description" content="MINECRAFT"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/avatar.gif" style="width:177px;"><h3 title><a href="/">IcePony</a></h3><div class="description"><p>More toss.</p></div></div></div><ul class="social-links"><li><a href="http://github.com/icepony"><i class="fa fa-github"></i></a></li></ul><div class="footer"><span>Theme by <a href="https://www.caicai.me" target="_blank">CaiCai </a></span><span>&amp;<a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank"> Ben</a></span><div class="by_farbox"></div><span>Powered By <a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a></span></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/links">友链</a></li><li><a href="/about">关于</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/images/favicon.ico"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>关于Minecraft的一些优化</a></h3></div><div class="post-content"><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">为我这样的渣机所准备</span><br></pre></td></tr></table></figure>
+<h2 id="画质类"><a href="#画质类" class="headerlink" title="画质类"></a>画质类</h2><h3 id="OptiFine"><a href="#OptiFine" class="headerlink" title="OptiFine"></a><a href="https://www.optifine.net" target="_blank" rel="noopener"><strong>OptiFine</strong></a></h3><p><img src="https://i.ytimg.com/vi/yAc37g-d8Pw/maxresdefault.jpg" title="Optifine" width="50%"></p>
+<p>使得原版可调整的地方更多了</p>
+<ul>
+<li><blockquote>
+<p>Optifine是高清补丁，可以使画面更细腻，画面设置分得更细(比如原版中，调节画质只能调流畅或高品质，装了高清补丁后，可以调节单一的树木、水、云等)还具有放大功能，还能使各种贴图完全加载，使纹理衔接在一起(比如无缝玻璃)，总之，装了之后画面会变好看</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h3 id="LessLag"><a href="#LessLag" class="headerlink" title="LessLag"></a><a href="https://minecraft.curseforge.com/projects/less-lag" target="_blank" rel="noopener">LessLag</a></h3><p><img src="https://media.forgecdn.net/avatars/144/648/636557218423809048.jpeg" width="30%"></p>
+<p>禁用纹理动画</p>
+<ul>
+<li><blockquote>
+<p>Basically the mod “disables” a method in base minecraft that “updates” animations of every texture 20 times a second, i obviously just stopped it from updating at all unless it’s one of the blocks included in the config. </p>
+<p>基本上mod会禁用<strong>基于Minecraft</strong>中的每秒20次更新纹理的动画，我显然只是阻止它进行更新，除非它是配置中包含的块之一。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="优化-修复类"><a href="#优化-修复类" class="headerlink" title="优化/修复类"></a>优化/修复类</h2><h3 id="Betterfps"><a href="#Betterfps" class="headerlink" title="Betterfps"></a><a href="https://minecraft.curseforge.com/projects/betterfps" target="_blank" rel="noopener">Betterfps</a></h3><p><img src="https://media.forgecdn.net/avatars/16/988/635655885251312698.png" width="30%"></p>
+<p><strong>通过优化mc的sin/cos函数的算法，来增加帧数</strong></p>
+<ol>
+<li><p><strong>快速漏斗</strong></p>
+</li>
+<li><p>它们在不需要时刻检查物品。只需在其上方放置一个坚固的方块就可以停止寻找要拾取的物品。</p>
+</li>
+<li><p><strong>内存预分配</strong></p>
+<ul>
+<li>删除10MB的RAM预分配。添加此分配是为了防止玩家以低内存启动游戏，但这种分配一直保持到几乎内存达到极限。这仅适用于使用modpacks的玩家，其中内存可能是个问题。如果你有足够的内存，这对你来说几乎没用。</li>
+</ul>
+</li>
+<li><p><strong>快速搜索</strong></p>
+<ul>
+<li><p>创意模式搜索真的没有优化，在大型整合包中，按下文本输入中的任何键都会使游戏卡顿片刻。此举改进实现了智能搜索算法，将旧结果重新用于新搜索。它还可以防止任何非alphadecimal键（例如shift）更新搜索。</p>
+<p>它还支持多线程/异步搜索：它们可以防止搜索时出现滞后峰值</p>
+</li>
+</ul>
+</li>
+<li><p><strong>雾造成了很多卡顿，为什么不添加一个选项来删除它？</strong></p>
+</li>
+<li><p><strong>去除光束的透明层。当有很多信标时，它可能会有所帮助。</strong></p>
+</li>
+</ol>
+<hr>
+<h3 id="Clumps"><a href="#Clumps" class="headerlink" title="Clumps"></a><a href="https://minecraft.curseforge.com/projects/clumps" target="_blank" rel="noopener">Clumps</a></h3><p><img src="https://media.forgecdn.net/avatars/84/193/636193647832736518.gif" width="30%"></p>
+<ul>
+<li><blockquote>
+<p>Clumps groups XP orbs together into a single entity to reduce lag when there are many in a small area. Ontop of this, it also makes the player immediately collect the orbs once they touch the player, so you are not stuck with a bunch of orbs in your face.</p>
+<p>Clumps将XP球体组合成一个单独的实体，以减少在小区域中存在许多延迟时的滞后。</p>
+<p>在此之后，它还会让玩家在接触到玩家后立即收集球体，这样你就不会被一堆球体困在脸上。</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h3 id="FastWorkbench"><a href="#FastWorkbench" class="headerlink" title="FastWorkbench"></a><a href="https://minecraft.curseforge.com/projects/fastworkbench" target="_blank" rel="noopener">FastWorkbench</a></h3><p><img src="https://media.forgecdn.net/avatars/164/244/636686097718417988.png" width="30%"></p>
+<ul>
+<li><blockquote>
+<p>Specifically, it caches the last recipe used, and checks this recipe first before re-scanning the entire registry.  This makes shift click crafting operate much faster than before.  It also lowers network traffic by sending a packet only when needed instead of whenever a slot in changed in the crafting grid.  </p>
+<p>具体来说，它会<strong>缓存最后使用的配方</strong>，并在重新扫描整个注册表之前<strong>先检查此配方</strong>。这使得合成比以前更快。它还通过仅在<strong>需要时</strong>发送数据包,而不是在合成网格中<strong>更改物品的位置</strong>来降低网络流量。  </p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h3 id="FoamFix"><a href="#FoamFix" class="headerlink" title="FoamFix"></a><a href="https://minecraft.curseforge.com/projects/foamfix-for-minecraft" target="_blank" rel="noopener">FoamFix</a></h3><p><img src="https://asie.pl/img/logos/foamfix.png"></p>
+<ul>
+<li><blockquote>
+<p>FoamFix is a mod designed to optimize post-1.7.10 modded Minecraft using simple, targeted optimizations. Observations show that Java heap usage (measured using VisualVM on the main menu) can drop by as much as 50%!</p>
+<p>FoamFix是一个mod，旨在使用简单的，有针对性的优化来优化1.7.10之后的Minecraft。观察显示Java堆使用率（使用主菜单上的VisualVM测量）可以下降多达50％！</p>
+</blockquote>
+</li>
+<li><p><a href="https://unascribed.com/b/2017-17-10-so-heres-how-foamfix-works.html" target="_blank" rel="noopener"><strong>配置/帮助文档</strong></a></p>
+</li>
+</ul>
+<hr>
+<h3 id="SmothFont"><a href="#SmothFont" class="headerlink" title="SmothFont"></a><a href="https://minecraft.curseforge.com/projects/smooth-font" target="_blank" rel="noopener">SmothFont</a></h3><p><img src="https://i.imgur.com/3xZl0AL.png"></p>
+<ul>
+<li><blockquote>
+<p>This mod draws all fonts (including resource pack’s fonts) smoothly for better readability on all scales. Furthermore, you can use any font installed on your computer.</p>
+<p>此mod可以平滑地绘制所有字体（包括资源包的字体），以便在所有比例下更好地读取。此外，您可以使用计算机上安装的任何字体。</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h3 id="TixFix"><a href="#TixFix" class="headerlink" title="TixFix"></a><a href="https://minecraft.curseforge.com/projects/texfix" target="_blank" rel="noopener">TixFix</a></h3><p><img src="https://media.forgecdn.net/avatars/136/910/636511081139794545.png" width="30%"></p>
+<ul>
+<li><p>删除无用材质</p>
+</li>
+<li><blockquote>
+<p>There comes this mod into play, after everything is loaded it goes over your texture manager and deletes all the none animate sprites from your ram to reduce the amount of Ram that is using.<br>将这个模组加入游戏中后，一切都加载完毕后，它会遍历材质管理器并删除所有非动态材质所造成的内存空间碎片，以减少内存占用。</p>
+</blockquote>
+<ul>
+<li><blockquote>
+<p>FoamFix-Anarchy + Tinkers Construct: You will find to have some Tinkers Construct tools have just white, Textures. Sadly i can’t fix that since its a multible things combined causes this issue.<br>To fix that issue for you disable the dynamicItemModels option in FoamFix-Anarchy Config. This is only a issue with the Anarchy version. The law version is totally fine!<br>Foamfix Anarchy+Tinkers Construct（匠魂）引发的问题：你会发现一些匠魂的工具只会有白色材质（或者别的问题）。我很遗憾修复不了这个，因为这是一些复杂因素共同导致的问题。解决这个问题，你可以在Foamfix Anarchy的配置文件（config）里面将dynamicItemModels选项设定为false，当然你也可以选用Foamfix Lawful，这个没有问题。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="VanillaFix"><a href="#VanillaFix" class="headerlink" title="VanillaFix"></a><a href="https://minecraft.curseforge.com/projects/vanillafix" target="_blank" rel="noopener">VanillaFix</a></h3><p><img src="https://media.forgecdn.net/avatars/151/327/636603225300587402.png" width="30%"></p>
+<ul>
+<li><p>原版修复是一款能够提高性能并且修复一些原版中的BUG的MOD。最主要的是修复崩溃这一类。</p>
+<ul>
+<li><p>安装了原版修复后，Minecraft将不再完全崩溃，而是将玩家踢出主菜单并提供一个连接，方便你看崩溃报告。</p>
+</li>
+<li><p>只勾选可见的动态材质(提升FPS)</p>
+</li>
+<li><p>使得空间传送速度加快</p>
+</li>
+<li><p>在大型整合包使世界创建变得更快</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><div class="tip"><br> 安装了此mod之后不需要一下的mod/选项<br>&bull; F5Fix<br>&bull; Bed Bugs<br>&bull; Bed Patch<br>&bull; “Smart Animations” in Optifine</div></p>
+<hr>
+<h3 id="WHAT-Fluid-Fix"><a href="#WHAT-Fluid-Fix" class="headerlink" title="WHAT - Fluid Fix"></a><a href="https://minecraft.curseforge.com/projects/what-fluid-fix" target="_blank" rel="noopener">WHAT - Fluid Fix</a></h3><p><img src="https://media.forgecdn.net/avatars/147/432/636576674856672154.png" width="30%"></p>
+<ul>
+<li><blockquote>
+<p>It’s time for technical explanations again. The forge fluid registry has a fatal flaw in that it can change the default fluid on world load, but only one forge bucket will be baked and only one fluid texture will be stitched into the texture atlas. This results in black and purple quilt textures on fluid tanks if two mods add the same fluid (Steam, Oil, Molten Metals, …). This mod doesn’t solve the discrepancy between the world default and the load default, it simply stitches ALL fluid textures to ensure there will be a texture to render even if the world default doesn’t match the load default.<br><br>是时候再次进行技术解释了。Forge液体注册表有一个致命的缺陷，它可以改变世界加载的默认流体，但只有一个Forge桶将被加载，只有一个流体纹理将被缝合到纹理图集中。如果两个mod添加相同的流体（蒸汽，油，熔融金属……），这会在流体罐上产生黑色和紫色的纹理。此mod不能解决改变世界&comma;它只是缝合所有流体纹理，以确保即使世界默认值与加载默认值不匹配也不会有渲染错误纹理。</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2019-03-21</span><i class="fa fa-comment-o"></i><a href="/2019/03/21/Minecraft_optimize/#comments">评论</a><i class="fa fa-tag"></i><a class="tag" href="/categories/GAME/" title="GAME">GAME </a><a class="tag" href="/tags/MOD/" title="MOD">MOD </a><a class="tag" href="/tags/MINECRAFT/" title="MINECRAFT">MINECRAFT </a><a class="tag" href="/tags/optimize/" title="optimize">optimize </a></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://yoursite.com/2019/03/21/Minecraft_optimize/,IcePony,关于Minecraft的一些优化,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2019/03/23/3-23/" title="3.23">上一篇</a></li></ul></div><a id="comments"></a><div id="disqus_thread"></div><script>var disqus_shortname = 'icepony';
+var disqus_identifier = '2019/03/21/Minecraft_optimize/';
+var disqus_title = '关于Minecraft的一些优化';
+var disqus_url = 'http://yoursite.com/2019/03/21/Minecraft_optimize/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//#{theme.disqus}.disqus.com/count.js" async></script></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
