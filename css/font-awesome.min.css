@@ -1142,8 +1142,11 @@
 .fa-instagram:before {
 	content:"\f16d"
 }
+.icon-bilibili::before {
+	content: "\f16e"
+}
 .fa-flickr:before {
-	content:"\f16e"
+	content:"\f16f"
 }
 .fa-adn:before {
 	content:"\f170"
