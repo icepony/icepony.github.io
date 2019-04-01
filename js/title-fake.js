@@ -3,13 +3,13 @@
  var titleTime;
  document.addEventListener('visibilitychange', function () {
      if (document.hidden) {
-         document.title = '(＞﹏＜）看不到我了 · IcePony';
+         document.title = '(＞﹏＜）我藏起来了 · IcePony';
          clearTimeout(titleTime);
      }
      else {
-         document.title = '' + OriginTitle;
+         document.title = '\^o^/被找到了 · IcePony' + OriginTitle;
          titleTime = setTimeout(function () {
              document.title = OriginTitle;
-         }, 0);
+         }, 200);
      }
  });
